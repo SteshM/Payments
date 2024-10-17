@@ -26,6 +26,7 @@ public class ProductsService {
 
     public ResponseDTO addProduct(ProductDTO productDTO) throws JsonProcessingException {
         ProductEntity productEntity = modelMapper.map(productDTO, ProductEntity.class);
+        productEntity.setStockQuantity(productDTO.getStockQuantity());
         productEntity.setAvailabilityStatus(AvailabilityStatus.IN_STOCK);
         log.info("About to save a product in the db {}",new ObjectMapper().writeValueAsString(productEntity));
         dataService.saveProduct(productEntity);
